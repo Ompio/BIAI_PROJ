@@ -48,7 +48,7 @@ def plot_image(i, predictions_array, img):
 
 def plot_value_array(i, predictions_array, class_names):
     plt.grid(False)
-    plt.xticks(range(7))
+    plt.xticks(range(7), rotation=45)
     plt.yticks([])
     thisplot = plt.bar(class_names, predictions_array, color="#777777")
     plt.ylim([0, 1])
@@ -59,10 +59,10 @@ def plot_value_array(i, predictions_array, class_names):
 
 
 i = 0
-plt.figure(figsize=(10, 3))
+plt.figure(figsize=(10, 6))
 plt.subplot(1, 2, 1)
 plot_image(i, predictions[i], image)
-plt.subplots(figsize=(15, 15))
+#plt.subplots(figsize=(4, 3))
 plt.subplot(1, 2, 2)
 plot_value_array(i, predictions[i], class_names)
 plt.show()
