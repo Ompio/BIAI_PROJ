@@ -1,26 +1,22 @@
-import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-from keras.models import Sequential
-from keras.layers import Activation, Dense, Flatten, BatchNormalization, Conv2D, MaxPool2D
-from keras.optimizers import Adam
-from keras.metrics import categorical_crossentropy
-from keras.preprocessing.image import ImageDataGenerator
-from sklearn.metrics import confusion_matrix
-import itertools
-import os
-import shutil
-import random
 import glob
-import matplotlib.pyplot as plt
+import os
+import random
+import shutil
 import warnings
 
-warnings.simplefilter(action='ignore', category=FutureWarning)
-# %matplotlib inline
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from keras.layers import Dense, Flatten, Conv2D, MaxPool2D
+from keras.models import Sequential
+from keras.optimizers import Adam
+from keras.preprocessing.image import ImageDataGenerator
 
-# physical_devices = tf.config.experimental.list_physical_devices('GPU')
-# print("Num GPUs Available:", len(physical_devices))
-# tf.config.experimental.set_memory_growth(physical_devices[0], True)
+warnings.simplefilter(action='ignore', category=FutureWarning)
+#%matplotlib inline
+
+#physical_devices = tf.config.experimental.list_physical_devices('GPU')
+#print("Num GPUs Available:", len(physical_devices))
+#tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 os.chdir('..')
 print(os.getcwd())
@@ -49,10 +45,9 @@ valid_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.
 test_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.vgg16.preprocess_input) \
     .flow_from_directory(directory=test_path, target_size=(48, 48), classes=emotions_dirs, batch_size=10, shuffle=False)
 
-# print(f"traint b: {train_batches.n}")
+#print(f"traint b: {train_batches.n}")
 
 imgs, labels = next(train_batches);
-
 
 def plotImages(images_arr):
     fig, axes = plt.subplots(1, 10, figsize=(20, 20))
@@ -62,7 +57,6 @@ def plotImages(images_arr):
         ax.axis('off')
     plt.tight_layout()
     plt.show()
-
 
 #plotImages(imgs)
 print(labels)
