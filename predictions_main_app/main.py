@@ -18,7 +18,7 @@ from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 
 os.chdir('..')
-image = keras.utils.image_utils.load_img('test_files/c5.png', target_size=(48, 48))
+image = keras.utils.image_utils.load_img('test_files/test2.jpg', target_size=(48, 48))
 image_array = keras.utils.image_utils.img_to_array(image)
 input_image = image_array.reshape((1, image_array.shape[0], image_array.shape[1], image_array.shape[2]))
 print(input_image.shape)
@@ -79,4 +79,36 @@ plt.show()
 #   plot_value_array(i, predictions[i], test_labels)
 # plt.tight_layout()
 # plt.show()
+
+# TODO kod od obsługi kamery
+#import cv2
+#
+# # Inicjalizacja obiektu przechwytującego obraz z kamery
+# cap = cv2.VideoCapture(0)  # 0 oznacza indeks kamery w systemie (może być inny w zależności od konfiguracji)
+#
+# # Sprawdzenie, czy kamera została poprawnie otwarta
+# if not cap.isOpened():
+#     print("Nie można otworzyć kamery")
+#     exit()
+#
+# # Odczyt obrazu z kamery w pętli
+# while True:
+#     # Odczyt klatki z kamery
+#     ret, frame = cap.read()
+#
+#     # Sprawdzenie, czy klatka została poprawnie odczytana
+#     if not ret:
+#         print("Błąd odczytu klatki z kamery")
+#         break
+#
+#     # Wyświetlenie klatki
+#     cv2.imshow('Kamera', frame)
+#
+#     # Przerwanie pętli po naciśnięciu klawisza 'q'
+#     if cv2.waitKey(1) == ord('q'):
+#         break
+#
+# # Zamknięcie obiektu przechwytującego obraz z kamery i zamknięcie okna
+# cap.release()
+# cv2.destroyAllWindows()
 
