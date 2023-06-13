@@ -18,7 +18,7 @@ from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 
 os.chdir('..')
-image = keras.utils.image_utils.load_img('test_files/test2.jpg', target_size=(48, 48))
+image = keras.utils.image_utils.load_img('test_files/6.jpg', target_size=(48, 48))
 image_array = keras.utils.image_utils.img_to_array(image)
 input_image = image_array.reshape((1, image_array.shape[0], image_array.shape[1], image_array.shape[2]))
 print(input_image.shape)
@@ -74,9 +74,9 @@ plt.show()
 # plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 # for i in range(num_images):
 #   plt.subplot(num_rows, 2*num_cols, 2*i+1)
-#   plot_image(i, predictions[i], test_labels, test_images)
+#   plot_image(i, predictions[i], image)
 #   plt.subplot(num_rows, 2*num_cols, 2*i+2)
-#   plot_value_array(i, predictions[i], test_labels)
+#   plot_value_array(i, predictions[i], class_names)
 # plt.tight_layout()
 # plt.show()
 
