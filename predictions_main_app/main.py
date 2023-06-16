@@ -18,15 +18,19 @@ from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 
 os.chdir('..')
-image = keras.utils.image_utils.load_img('test_files/6.jpg', target_size=(48, 48))
-image_array = keras.utils.image_utils.img_to_array(image)
-input_image = image_array.reshape((1, image_array.shape[0], image_array.shape[1], image_array.shape[2]))
-print(input_image.shape)
+input_image = []
+image = []
+for filename in os.listdir('test_files'):
+    tmp_image = keras.utils.image_utils.load_img(f'test_files/{filename}', target_size=(48, 48))
+    image.append(tmp_image)
+    image_array = keras.utils.image_utils.img_to_array(tmp_image)
+    input_image.append(image_array.reshape((1, image_array.shape[0], image_array.shape[1], image_array.shape[2])))
+#print(input_image.shape)
 new_model = tf.keras.models.load_model('saved_model')
+dataset = tf.data.Dataset.from_tensor_slices(input_image)
 
 new_model.summary()
-predictions = new_model.predict(input_image)
-print(predictions[0])
+predictions = new_model.predict(dataset)
 class_names = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
 
@@ -56,7 +60,17 @@ def plot_value_array(i, predictions_array, class_names):
     thisplot[predicted_label].set_color('red')
 
 
-
+num_rows = 4
+num_cols = 4
+num_images = num_rows*num_cols
+plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+for i in range(num_images):
+    plt.subplot(num_rows, 2*num_cols, 2*i+1)
+    plot_image(i, predictions[i], image[i])
+    plt.subplot(num_rows, 2*num_cols, 2*i+2)
+    plot_value_array(i, predictions[i], class_names)
+plt.tight_layout()
+plt.show()
 
 i = 0
 plt.figure(figsize=(10, 6))
